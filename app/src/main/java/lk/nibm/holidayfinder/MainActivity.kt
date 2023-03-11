@@ -113,13 +113,14 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
 
+
     fun getHolidaydata(selectedCountryCode: String, selectedYear: String) {
 
         Log.e("output", "Selected code: $selectedCountryCode")
         Log.e("output", "Selected year: $selectedYear")
 
-        val url = "https://calendarific.com/api/v2/holidays?&api_key=afd135c1d18af776c23617bb89d0b0f63651bc89&country=" + selectedCountryCode + "&year=" + selectedYear + ""
-        Log.e("url",url)
+         val url = "https://calendarific.com/api/v2/holidays?&api_key=afd135c1d18af776c23617bb89d0b0f63651bc89&country=" + selectedCountryCode + "&year=" + selectedYear + ""
+      Log.e("url",url)
 
 
         val result = StringRequest(Request.Method.GET,url,
@@ -176,13 +177,28 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
 
-    inner class HolidayView(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class HolidayView(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
 
         val holidayname : TextView = itemView.findViewById(R.id.txtholiday)
         val holidaymonth : TextView = itemView.findViewById(R.id.txtmonth)
         val holidatdate : TextView = itemView.findViewById(R.id.txtdate)
 
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val holiday = holidaydetails.getJSONObject(position)
+                val intent = Intent(itemView.context, Holidaydetails::class.java)
+              intent.putExtra("holiday", holiday.toString())
+                itemView.context.startActivity(intent)
+
+
+            }
+        }
 
 
     }
