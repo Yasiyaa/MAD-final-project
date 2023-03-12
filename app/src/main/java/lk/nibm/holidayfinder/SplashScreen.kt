@@ -17,6 +17,12 @@ class SplashScreen : AppCompatActivity() {
 
         )
 
+        if (supportActionBar != null) {
+
+            supportActionBar!!.hide()
+
+        }
+
         Handler().postDelayed({
             // on below line we are
             // creating a new intent

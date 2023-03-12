@@ -59,6 +59,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (supportActionBar != null) {
+
+            supportActionBar!!.hide()
+
+        }
+
         spinnerCountry = findViewById(R.id.spinner_country)
         spinnerYear = findViewById(R.id.spinner_year)
         nextbtn = findViewById(R.id.btn_next)

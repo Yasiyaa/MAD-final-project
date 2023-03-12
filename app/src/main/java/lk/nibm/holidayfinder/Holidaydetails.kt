@@ -21,6 +21,12 @@ class Holidaydetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_holidaydetails)
 
+        if (supportActionBar != null) {
+
+            supportActionBar!!.hide()
+
+        }
+
         holidayname = findViewById(R.id.txt_holidayname)
         holidaydescription = findViewById(R.id.txt_description)
         holidaycountry = findViewById(R.id.txt_country)
