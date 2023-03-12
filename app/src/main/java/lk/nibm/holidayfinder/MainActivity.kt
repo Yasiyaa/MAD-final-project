@@ -1,6 +1,7 @@
 package lk.nibm.holidayfinder
 
 import android.content.Intent
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +20,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
 import org.json.JSONObject
-import org.w3c.dom.Text
+
+
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         )
 
-    val years = arrayOf("2020", "2021", "2022", "2023", "2024","2025")
+    val years = arrayOf("2020", "2021", "2022", "2023", "2024","2025","2026","2027")
 
     var holidaydetails = JSONArray()
 
@@ -79,8 +81,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         recyclerView.adapter = HolidayApadtor()
 
+        // Set the default value of the spinner to the current system year
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString()
+        spinnerYear.setSelection(adapteryears.getPosition(currentYear))
+
+
+       // getLocation()
+
 
     }
+
 
 
        override  fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
