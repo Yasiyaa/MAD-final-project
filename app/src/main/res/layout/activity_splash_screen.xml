@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idRLContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#092F50"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!--on below line we are adding an image view-->
+    <ImageView
+        android:id="@+id/idIVLogo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="25dp"
+        android:src="@drawable/leaf"
+        app:tint="@color/teal_700" />
+
+    <!--on below line we are creating progress bar-->
+    <ProgressBar
+        android:id="@+id/idPBLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idIVLogo"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idPBLoading"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="120dp"
+        android:text="Developed by Team 7"
+        android:textSize="18dp"
+        android:textColor="#6E6B6B" />
+
+</RelativeLayout>
