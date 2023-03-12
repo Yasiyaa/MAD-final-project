@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,9 +28,12 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     lateinit var spinnerYear : Spinner
     lateinit var nextbtn : Button
     lateinit var recyclerView: RecyclerView
+    lateinit var progressbar : ProgressBar
 
     var selectedCountryCode: String? = null
     var selectedYear: String? = null
+    val handler = android.os.Handler()
+
 
     val countries = listOf(
         Pair("lk", "Sri Lanka"),
@@ -56,6 +61,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         spinnerYear = findViewById(R.id.spinner_year)
         nextbtn = findViewById(R.id.btn_next)
         recyclerView = findViewById(R.id.recycleview)
+        progressbar = findViewById(R.id.progress_Bar)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
             countries.map { it.second })
@@ -94,9 +100,31 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
            if (selectedCountryCode != null && selectedYear != null) {
 
                nextbtn.setOnClickListener {
-                   getHolidaydata(selectedCountryCode!!,selectedYear!! )
-//
 
+                   var i = 0
+                   progressbar.visibility = VISIBLE
+                   i = progressbar.progress
+
+                   Thread(Runnable {
+
+                       while (i < 100) {
+                           i += 10
+                           handler.post(Runnable {
+                               progressbar.progress = i
+                           })
+                           try {
+                               Thread.sleep(100)
+                           } catch (e: InterruptedException) {
+                               e.printStackTrace()
+                           }
+                       }
+
+
+
+                       progressbar.visibility = INVISIBLE
+                   }).start()
+
+                   getHolidaydata(selectedCountryCode!!,selectedYear!! )
 
 
                }
@@ -194,6 +222,29 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 val holiday = holidaydetails.getJSONObject(position)
                 val intent = Intent(itemView.context, Holidaydetails::class.java)
               intent.putExtra("holiday", holiday.toString())
+
+                var i = 0
+                progressbar.visibility = VISIBLE
+                i = progressbar.progress
+
+                Thread(Runnable {
+
+                    while (i < 100) {
+                        i += 2
+                        handler.post(Runnable {
+                            progressbar.progress = i
+                        })
+                        try {
+                            Thread.sleep(100)
+                        } catch (e: InterruptedException) {
+                            e.printStackTrace()
+                        }
+                    }
+
+
+
+                    progressbar.visibility = INVISIBLE
+                }).start()
                 itemView.context.startActivity(intent)
 
 
